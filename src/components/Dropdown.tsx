@@ -1,6 +1,8 @@
 // Dropdown으로 버블링 전파 이해하기: useRef로 외부감지 및 버블링 중단
 import { useEffect, useRef, useState } from 'react';
 
+// 메뉴 클릭시 닫게 하고 싶음
+
 export default function () {
   const dropdownRef = useRef<HTMLDivElement>(null); // 드롭다운 대상 요소 참조
   const [isMenuClicked, setMenuClicked] = useState(false); // 메뉴 클릭 여부
@@ -24,7 +26,16 @@ export default function () {
   }, []);
 
   return (
-    <>
+    <div
+      style={{
+        border: '1px solid black',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: 5,
+      }}
+    >
+      <h2>useRef와 이벤트전파</h2>
       <div
         onClick={() => alert('카드 전체')}
         style={{ backgroundColor: 'yellowgreen', width: 150 }}
@@ -58,6 +69,7 @@ export default function () {
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
+                  setMenuClicked((prev) => !prev);
                   alert('1번');
                 }}
               >
@@ -69,6 +81,6 @@ export default function () {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
