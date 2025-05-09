@@ -7,9 +7,6 @@ type Todo = {
   done: boolean;
 };
 
-// 전체 상태는 투두 항목들의 배열
-type State = Todo[];
-
 // 액션 타입 정의
 type Action =
   // 여러 줄로 유니언 타입을 쓸 때 가독성을 위해 앞에 | 붙임
@@ -18,7 +15,7 @@ type Action =
   | { type: 'DELETE'; payload: number }; // 특정 투두를 삭제할 때, payload는 투두 아이디
 
 // 상태를 변경하는 리듀서 함수
-function reducer(state: Todo[], action: Action): State {
+function reducer(state: Todo[], action: Action): Todo[] {
   switch (action.type) {
     case 'ADD':
       return [
@@ -36,14 +33,14 @@ function reducer(state: Todo[], action: Action): State {
       );
     case 'DELETE':
       return state.filter((todo) => todo.id !== action.payload); // 해당 ID 제외
+    default: // 모든 case를 처리했는지 타입으로 검증
+      const _exhaustive: never = action; // 모든 case를 처리 안했다면 이 코드를 실행하게 되고 action이 값이 있을거임
+      throw new Error(`처리되지 않은 액션 타입: ${JSON.stringify(action)}`);
   }
-  // 모든 case를 처리했는지 타입으로 검증
-  const _exhaustive: never = action; // 모든 case를 처리 안했다면 이 코드를 실행하게 되고 action이 값이 있을거임
-  throw new Error(`처리되지 않은 액션 타입: ${JSON.stringify(action)}`);
 }
 
 export default function TodoAppWithReducer() {
-  const initialState: State = [];
+  const initialState: Todo[] = [];
   const [state, dispatch] = useReducer(reducer, initialState);
   const [input, setInput] = useState('');
 
