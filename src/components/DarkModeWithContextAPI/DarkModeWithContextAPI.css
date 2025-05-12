@@ -1,0 +1,14 @@
+.app-container {
+  padding: 2rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.app-container.light {
+  background: white;
+  color: black;
+}
+
+.app-container.dark {
+  background: #121212;
+  color: white;
+}

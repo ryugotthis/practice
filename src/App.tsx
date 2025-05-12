@@ -9,6 +9,7 @@ import ShallowVsDeepCopyDemoWithImmer from './components/Copy3';
 import TodoAppWithReducer from './components/TodoAppwithReducer';
 import TodoAppWithState from './components/TodoAppWithState';
 import TodoAppWithImmerReducer from './components/TodoAppWithImmerReducer';
+import DarkModeWithContextAPI from './components/DarkModeWithContextAPI/DarkModeWithContextAPI';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <TodoAppWithState />
       <TodoAppWithReducer />
       <TodoAppWithImmerReducer />
+      <DarkModeWithContextAPI />
     </div>
   );
 }
